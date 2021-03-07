@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'forum.apps.ForumConfig',
     'members',
-    'crispy_forms'
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
