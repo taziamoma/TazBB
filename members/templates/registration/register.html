@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block bodywrap %}
+
+    <div class="container-fluid login-wrapper">
+                <div class="container-fluid login-container">
+                    <div class="container-fluid login-title">
+                        Login:
+                    </div>
+                    <div class="container-fluid login-form-container">
+
+                        <div class="container-fluid login-form">
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit" name='Login'>Login</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}

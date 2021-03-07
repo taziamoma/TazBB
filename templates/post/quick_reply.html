@@ -1,0 +1,48 @@
+<!-- REPLY -->
+<!-- POST REPLY BLOCK -->
+<div class="container-fluid post-block">
+    <!-- POST AUTHOR BLOCK -->
+    <div class="container-fluid post-author-block">
+        <div class="container-fluid post-author-container">
+            <div class="container-fluid avatar-container">
+                <div class="avatar"></div>
+            </div>
+            <div class="container-fluid author-details">
+                    <span class="member title">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'member' user.id %}">{{ user.get_username }}</a></span><br/>
+                            <span class="post-count">Post Count: {{ user.user_post_count }}</span>
+                        {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- POST AUTHOR BLOCK -->
+
+    <!-- POST CONTENT BLOCK -->
+    <div class="container-fluid post-content-block clearfix">
+        <div class="container-fluid post-body">
+            <div class="container-fluid reply-form">
+                {% if user.is_authenticated %}
+                    <!--START NEW THREAD FORM -->
+                    <div class="form-group">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ quick_reply_form.as_p }}
+                            <button type="submit" class="btn btn-primary" name="thread_submit">Send Reply
+                            </button>
+                        </form>
+                    </div>
+                    <!--END NEW THREAD FORM -->
+                {% else %}
+                    <h1>You must be logged in to reply</h1>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- POST CONTENT BLOCK -->
+
+</div>
+<!-- POST REPLY BLOCK -->
+
+<!-- REPLY -->

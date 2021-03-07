@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block title %} {{ forum_name }} {% endblock %}
+{% block bodywrap %}
+
+<!-- THREADLIST -->
+<!-- NEW THREAD BUTTON -->
+<div class="container-fluid thread-button-wrap">
+    <div class="container-fluid thread-button-left"></div>
+    <div class="container-fluid thread-button-right"><a class="new-thread btn btn-danger" href="{% url 'newthread' forum.id %}" role="button">New
+        Thread</a></div>
+</div>
+<!-- NEW THREAD BUTTON -->
+<div class="container-fluid thread-list-block"><!-- 1 blue -->
+    <div class="container-fluid threadlist-name">Threads</div> <!-- 2 -->
+    <!-- THREADLIST DISPLAY LOOP -->
+    {% if threads %}
+        <!--THREAD BLOCK -->
+        <div class="container-fluid threadlist-body"> <!-- 3 red-->
+            {% for thread in threads %}
+            <div class="container-fluid thread-content"> <!-- 4 green -->
+                <div class="thread-details">
+                    <span class='thread-name'><a href="{% url 'viewthread' thread.pk%}">{{ thread.name }}</a></span>
+                    <span class='thread-author'><a href="{% url 'member' thread.author.id %}">{{ thread.author }}</a> - {{ thread.date }}</span>
+                </div>
+                <div class="thread-stats-text">
+                    <span>Replies: {{ thread.thread_reply_count }}</span><br/><span>Views :</span>
+                </div>
+                <div class="thread-stats">
+                    <span></span>
+                </div>
+                <div class="thread-last-post">
+                    <span>Last post: <a href="{% url 'member' thread.thread_get_userid %}">{{ thread.thread_last_reply_user }}</a></span><br/>
+                    <span class="font-italic">on {{ thread.thread_last_reply_date }}</span>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <!--THREAD BLOCK -->
+        <!-- THREADLIST DISPLAY LOOP -->
+        </div>
+        <!-- THREADLIST -->
+
+    {% else %}
+        There are no threads in this category yet.
+    {% endif %}
+    <!-- PAGINATION -->
+        {% if is_paginated %}
+            <div class="container-fluid pagination_wrap clearfix">
+                <div class="container-fluid pagination_left"></div>
+
+                <div class="container-fluid pagination_right">
+                    <div class="container-fluid page_buttons_wrap">
+
+                        {% if page_obj.has_previous %}
+                            <a class="btn btn-info page_btn" href="{% url 'threadlist' forum.pk %}?page=1">First</a>
+                            <a class="btn btn-info page_btn"
+                               href="{% url 'threadlist' forum.pk %}?page={{ page_obj.previous_page_number }}"><</a>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <a class="btn btn-info page_btn active"
+                                   href="{% url 'threadlist' forum.id %}?page={{ num }}">{{ num }}</a>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <a class="btn btn-info page_btn"
+                                   href="{% url 'threadlist' forum.pk %}?page={{ num }}">{{ num }}</a>
+
+                            {% endif %}
+                        {% endfor %}
+
+
+                        {% if page_obj.has_next %}
+                            <a class="btn btn-info page_btn" href="{% url 'threadlist' forum.pk %}?page={{ page_obj.next_page_number }}">></a>
+                            <a class="btn btn-info page_btn" href="{% url 'threadlist' forum.pk %}?page={{ page_obj.paginator.num_pages }}">Last</a>
+                        {% endif %}
+
+                        <br>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="pagination">
+            <span class="page-links">
+
+            </span>
+            </div>
+        {% endif %}
+        <!-- PAGINATION -->
+
+{% endblock %}

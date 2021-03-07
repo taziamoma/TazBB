@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} New Thread {% endblock %}
+{% block bodywrap %}
+
+    <div class="container-fluid thread-form-wrapper">
+        <div class="container-fluid thread-form-text">
+            <h3>New Thread</h3>
+        </div>
+        <div class="container-fluid thread-form">
+            {% if user.is_authenticated %}
+                <!--START NEW THREAD FORM -->
+                <div class="form-group">
+                    <form method="post" >
+                        {% csrf_token %}
+                        {{ thread_form.as_p }}
+                        {{ post_form.as_p }}
+                        <button type="submit" class="btn btn-primary" name="thread_submit">New Thread</button>
+                    </form>
+                </div>
+                <!--END NEW THREAD FORM -->
+            {% else %}
+                <h1>You must be logged in to create a new thread</h1>
+
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+

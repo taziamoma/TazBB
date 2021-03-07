@@ -1,0 +1,24 @@
+{#START SIDEBAR #}
+    <div class="container-fluid right-body">
+        <div class="container-fluid right-body-container">
+            <div class="container-fluid stat-block">
+                <div class="container-fluid stat-name">
+                    Statistics
+                </div>
+                <div class="container-fluid sidebar_stats_wrap ">
+                    <div class="sidebar_stats .clearfix">
+                        <span class="left-total-stats">Total Threads: </span><span
+                            class="right-total-stats"> {{ thread_count }}</span>
+                        <span class="left-total-stats">Total Posts: </span><span
+                            class="right-total-stats"> {{ post_count }}</span>
+                        <span class="left-total-stats">Total Members: </span><span
+                            class="right-total-stats"> {{ user_count }}</span>
+                        <span class="left-total-stats">Newest Member: </span>
+                        <span class="right-total-stats"><a href="{% url 'member' newest_user.id %}">{{ newest_user }}</a></span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#END SIDEBAR #}

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block title %} {{ thread_name }} {% endblock %}
+{% block bodywrap %}
+    <div class="container-fluid post-page-wrapper">
+        <div class="container-fluid thread_name_wrap">
+            <div class="container-fluid thread_name">
+                <h3>{{ thread.name }}</h3>
+            </div>
+        </div>
+
+        <!-- POST BLOCK -->
+        {% if posts %}
+            {% with post_count=0 %}
+                {% for post in post_list %}
+                    <div class="container-fluid post-block">
+                        <!-- POST AUTHOR BLOCK -->
+                        <div class="container-fluid post-author-block">
+                            <div class="container-fluid post-author-container">
+                                <div class="container-fluid avatar-container">
+                                    <div class="avatar"></div>
+                                </div>
+                                <div class="container-fluid author-details">
+                                    <span class="member title"><a
+                                            href="{% url 'member' post.author.id %}">{{ post.author }}</a></span><br/>
+                                    <br/>
+                                    <span class="post-count">Post Count: {{ post.author.user_post_count }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- POST AUTHOR BLOCK -->
+                        <!-- POST CONTENT BLOCK -->
+                        <div class="container-fluid post-content-block clearfix">
+                            <div class="container-fluid post-details">
+                                <div class="container-fluid post-date">{{ post.post_date }}</div>
+                                <div class="container-fluid post-number">
+                                    <span class="post-count"> # {{ forloop.counter }}</span> <!-- update post number -->
+                                </div>
+                            </div>
+                            <div class="container-fluid post-body">
+                                {{ post.post_body }}
+                            </div>
+                        </div>
+                        <!-- POST CONTENT BLOCK -->
+                    </div>
+                    <!-- POST BLOCK -->
+                {% endfor %}
+            {% endwith %}
+        {% else %}
+            There is no posts
+        {% endif %}
+
+        <!-- PAGINATION -->
+        {% if is_paginated %}
+            <div class="container-fluid pagination_wrap clearfix">
+                <div class="container-fluid pagination_left"></div>
+
+                <div class="container-fluid pagination_right">
+                    <div class="container-fluid page_buttons_wrap">
+
+                        {% if page_obj.has_previous %}
+                            <a class="btn btn-info page_btn" href="{% url 'viewthread' thread.pk %}?page=1">First</a>
+                            <a class="btn btn-info page_btn"
+                               href="{% url 'viewthread' thread.pk %}?page={{ page_obj.previous_page_number }}"><</a>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <a class="btn btn-info page_btn active"
+                                   href="{% url 'viewthread' thread.pk %}?page={{ num }}">{{ num }}</a>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <a class="btn btn-info page_btn"
+                                   href="{% url 'viewthread' thread.pk %}?page={{ num }}">{{ num }}</a>
+
+                            {% endif %}
+                        {% endfor %}
+
+
+                        {% if page_obj.has_next %}
+                            <a class="btn btn-info page_btn" href="{% url 'viewthread' thread.pk %}?page={{ page_obj.next_page_number }}">></a>
+                            <a class="btn btn-info page_btn" href="{% url 'viewthread' thread.pk %}?page={{ page_obj.paginator.num_pages }}">Last</a>
+                        {% endif %}
+
+                        <br>
+
+                    </div>
+                </div>
+
+            </div>
+
+        {% endif %}
+        <!-- PAGINATION -->
+
+            {% include 'post/quick_reply.html' %}
+
+    </div>
+
+{% endblock %}

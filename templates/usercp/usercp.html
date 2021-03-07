@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block bodywrap %}
+
+    <div class="container-fluid usercp_left_body">
+        <div class="container-fluid usercp_wrap">
+            <div class="container-fluid usercp_summary clearfix">
+                <div class="usercp_title">
+                    Account Summary
+                </div>
+            </div>
+            {% if request.user.is_authenticated %}
+                <div class="usercp_user_details">
+                    <div class="usercp_avatar_container">
+                        <div class="avatar"></div>
+                    </div>
+                    <div class="usercp_details_content">
+                        <h3><a href="{% url 'member' user.id %}">{{ user }}</a></h3>
+                        <p><span class="font-weight-bold">Posts</span>: {{ user.user_post_count }}</p>
+                        <p><span class="font-weight-bold">Threads:</span> {{ user.user_thread_count }}</p>
+                        <p><span class="font-weight-bold">Email: </span> {{ user.email }}</p>
+                        <p><span class="font-weight-bold">Signup Date: </span>{{ user.date_joined }}</p>
+                        <p><span class="font-weight-bold">User Group: </span>{% if user.is_staff %}Staff{% else %}
+                            Member{% endif %}</p>
+                    </div>
+
+                </div>
+
+                </div>
+
+                <!-- YOUR LATEST THREADS -->
+                <div class="container-fluid usercp_wrap">
+                    <div class="container-fluid usercp_summary clearfix">
+                        <div class="usercp_title">
+                            Your Latest Threads
+                        </div>
+                        <div class="container-fluid usercp_all_threads">
+                            <a href="">Find All Your Threads</a>
+                        </div>
+                    </div>
+
+                    <div class="usercp_latest_threads">
+                        {% if threads %}
+                            <!--THREAD BLOCK -->
+                            <div class="container-fluid threadlist-body"> <!-- 3 red-->
+                                {% for thread in threads %}
+                                    <div class="container-fluid thread-content"> <!-- 4 green -->
+                                        <div class="thread-details">
+                            <span class='thread-name'><a
+                                    href="{% url 'viewthread' thread.pk %}">{{ thread.name }}</a></span>
+                                            <span class='thread-author'><a
+                                                    href="{% url 'member' thread.author.id %}">{{ thread.author }}</a> - {{ thread.date }}</span>
+                                        </div>
+                                        <div class="thread-stats-text">
+                                            <span>Replies: {{ thread.thread_reply_count }}</span><br/><span>Views :</span>
+                                        </div>
+                                        <div class="thread-stats">
+                                            <span><?php echo $reply_count; ?></span><br/><span><?php echo $thread_count; ?></span>
+                                        </div>
+                                        <div class="thread-last-post">
+                            <span>Last post: <a
+                                    href="{% url 'member' thread.thread_get_userid %}">{{ thread.thread_last_reply_user }}</a></span><br/>
+                                            <span class="font-italic">on {{ thread.thread_last_reply_date }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        {% endif %}
+
+
+                    </div>
+
+                </div>
+                <!-- YOUR LATEST THREADS -->
+                </div>
+
+
+                <!-- SIDEBAR -->
+                <div class="container-fluid right-body">
+                    <div class="container-fluid right-body-container">
+                        <div class="container-fluid stat-block">
+                            <div class="container-fluid stat-name">
+                                Your Profile
+                            </div>
+                            <div class="container-fluid sidebar_stats_wrap ">
+                                <div class="sidebar_stats .clearfix">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#"><i class="fas fa-user-edit"></i> Edit Profile</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"><i class="fas fa-unlock"></i> Change Password</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"><i class="fas fa-envelope"></i> Change Email</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"><i class="fas fa-user-tie"></i> Change Avatar</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"><i class="fas fa-cogs"></i> Edit Options</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- SIDEBAR -->
+            {% else %}
+                <div class="container-fluid usercp_left_body">
+                    <div class="container-fluid usercp_wrap">
+                        <div class="container-fluid usercp_summary">
+                            <div class="usercp_title">
+                                Login
+                            </div>
+                        </div>
+                        <h3>You must be logged in to view your UserCP</h3>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+{% endblock %}

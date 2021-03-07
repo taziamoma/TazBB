@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block bodywrap %}
+
+    {#START LAYOUT #}
+    <div class="container-fluid left-body">
+        <!-- FORUM LAYOUT BLOCK -->
+        {% for category in categorys %}
+            <div class="container-fluid category-block"> <!-- 1 blue-->
+                <div class="container-fluid category-name">{{ category.name }}</div> <!-- 2 -->
+                <!-- LOOP FORUMS -->
+                {% for forum in category.forums.all %}
+                    <div class="container-fluid category-forums clearfix"> <!-- 3 red -->
+                        <div class="container-fluid category-forums-wrap d-flex align-items-center"> <!-- 4 green -->
+                            <div class="container-fluid forum-details-wrapper clearfix">
+                                <div class="container-fluid forum-details-container">
+                                    <p class="forum-name"><a href="{% url 'threadlist' forum.pk %}">{{ forum.name }}</a>
+                                    </p>
+                                    <p class="forum-desc">{{ forum.description }}</p>
+
+                                    <div class="sub-forum-container container clearfix">
+                                        <p class="sub-forums clearfix">{{ forum.category }}</p>
+                                        <p class="sub-forums clearfix">Sub-Category 2</p>
+                                        <p class="sub-forums clearfix">Sub-Category 3</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="container-fluid forum-threads clearfix">
+                                <div class="forum_threads_count">
+                                    {{ forum.total_threads }}
+                                </div>
+                                <div class="forum_threads_threads">
+                                    <span>Threads</span>
+                                </div>
+                            </div>
+                            <div class="container-fluid forum-posts clearfix">
+                                <div class="forum_posts_count">
+                                    {{ forum.total_posts }}
+                                </div>
+                                <div class="form_posts_text">
+                                    <span>Posts</span>
+                                </div>
+                            </div>
+                            <div class="container-fluid forum-latest-posts clearfix">
+
+                                <span class="last_thread"><a href="{% url 'viewthread' forum.last_post_thread %}">{{ forum.last_post_thread_name }}</a></span>
+                                <span class='last_post_by'>by <a href="{% url 'member' forum.last_post_thread_author_id %}">{{ forum.last_post_thread_author }}</a></span>
+                                <span class="last_post font-italic">Last Post</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- LOOP FORUMS -->
+            </div>
+        {% endfor %}
+        <!-- FORUM LAYOUT BLOCK -->
+    </div>
+    {#END LAYOUT #}
+    {% include 'sidebar.html' %}
+
+
+{% endblock %}

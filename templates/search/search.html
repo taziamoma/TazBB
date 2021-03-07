@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% load crispy_forms_field %}
+{% block bodywrap %}
+
+    <div class="container-fluid search_wrap">
+    <div class="container-fluid usercp_summary clearfix">
+        <div class="search_title">
+            Search
+        </div>
+    </div>
+    {% if request.user.is_authenticated %}
+        <div class="search-filters-wrap">
+
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-everything-tab" data-toggle="tab" href="#nav-everything" role="tab"
+                       aria-controls="nav-everything" aria-selected="true">Search Everything</a>
+                    <a class="nav-item nav-link" id="nav-threads-tab" data-toggle="tab" href="#nav-threads" role="tab"
+                       aria-controls="nav-threads" aria-selected="false">Search Threads</a>
+                    <a class="nav-item nav-link" id="nav-posts-tab" data-toggle="tab" href="#nav-posts" role="tab"
+                       aria-controls="nav-posts" aria-selected="false">Search Posts</a>
+                </div>
+            </nav>
+            <!-- SEARCH EVERYTHING -->
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-everything" role="tabpanel" aria-labelledby="nav-everything-tab">
+                    <div class="search-filters-content">
+                        Hi
+                    </div>
+                </div>
+                <!-- SEARCH EVERYTHING -->
+
+                <!-- SEARCH THREADS -->
+                <div class="tab-pane fade" id="nav-threads" role="tabpanel" aria-labelledby="nav-threads-tab">
+                    <div class="search-filters-content">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="keywords" class="col-sm-2 col-form-label">Keywords</label>
+                                <div class="col-sm-10">
+                                    {{ search_thread_form.keywords }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="authors" class="col-sm-2 col-form-label">Authors</label>
+                                <div class="col-sm-10">
+                                    {{ search_thread_form.authors }}
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- SEARCH THREADS -->
+
+                <!-- SEARCH POSTS -->
+                <div class="tab-pane fade" id="nav-posts" role="tabpanel" aria-labelledby="nav-posts-tab">
+                    <div class="search-filters-content">
+                        <form>
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+                                           value="email@example.com">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="inputPassword"
+                                           placeholder="Password">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- SEARCH POSTS -->
+
+            </div>
+
+        </div>
+
+    {% else %}
+        <div class="container-fluid usercp_left_body">
+            <div class="container-fluid usercp_wrap">
+                <div class="container-fluid usercp_summary">
+                    <div class="usercp_title">
+                        Login
+                    </div>
+                </div>
+                <h3>You must be logged in to search the forums</h3>
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block bodywrap %}
+
+    <div class="container-fluid search_wrap">
+        <div class="container-fluid usercp_summary clearfix">
+            <div class="search_title">
+                Search
+            </div>
+        </div>
+        {% if request.user.is_authenticated %}
+            <div class="search-filters-wrap">
+                <!-- YOUR LATEST THREADS -->
+                    <div class="usercp_latest_threads">
+                        {% if threads %}
+                            <!--THREAD BLOCK -->
+                            <div class="container-fluid threadlist-body"> <!-- 3 red-->
+                                {% for thread in threads %}
+                                    <div class="container-fluid thread-content"> <!-- 4 green -->
+                                        <div class="thread-details">
+                            <span class='thread-name'><a
+                                    href="{% url 'viewthread' thread.pk %}">{{ thread.name }}</a></span>
+                                            <span class='thread-author'><a
+                                                    href="{% url 'member' thread.author.id %}">{{ thread.author }}</a> - {{ thread.date }}</span>
+                                        </div>
+                                        <div class="thread-stats-text">
+                                            <span>Replies: {{ thread.thread_reply_count }}</span><br/><span>Views :</span>
+                                        </div>
+                                        <div class="thread-stats">
+                                            <span><?php echo $reply_count; ?></span><br/><span><?php echo $thread_count; ?></span>
+                                        </div>
+                                        <div class="thread-last-post">
+                            <span>Last post: <a
+                                    href="{% url 'member' thread.thread_get_userid %}">{{ thread.thread_last_reply_user }}</a></span><br/>
+                                            <span class="font-italic">on {{ thread.thread_last_reply_date }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        {% endif %}
+
+
+                    </div>
+
+
+                <!-- YOUR LATEST THREADS -->
+
+
+            </div>
+
+            </div>
+
+        {% else %}
+            <div class="search-filters-wrap">
+                <h3>You must be logged in to search the forums</h3>
+
+
+            </div>
+
+        {% endif %}
+
+
+{% endblock %}
