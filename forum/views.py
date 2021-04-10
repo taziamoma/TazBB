@@ -16,11 +16,10 @@ class HomeView(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(HomeView, self).get_context_data(*args, **kwargs)
         categorys = Category.objects.all()
-        # forum = Forum.objects.filter(category=categorys)
-        # forum_thread_count = Thread.objects.filter(thread_forum=forum)
+
 
         context['categorys'] = categorys
-        # context['forum_thread_count'] = forum_thread_count
+
         # Side bar statisitcs
         context['thread_count'] = Thread.objects.all().count()
         context['post_count'] = Post.objects.all().count()
@@ -29,15 +28,6 @@ class HomeView(ListView):
         # Side bar statisitcs
 
         return context
-
-
-# the forum parameter comes from the urls.py
-# def ThreadlistView(request, forum):
-# creating a filter where the passed in forum parameter equals the forum attribute in the Thread model
-#   threads = Thread.objects.filter(thread_forum=forum).order_by('-date')
-#  forum_name = Forum.objects.get(id=forum)
-# return render(request, 'thread/threadlist.html',
-#              {'forum': forum, 'threads': threads, 'forum_name': forum_name.name})
 
 class ThreadlistView(ListView):
     model = Thread
@@ -103,7 +93,6 @@ class NewThreadView(CreateView):
     template_name = 'thread/newthread.html'
 
     def post(self, request, *args, **kwargs):
-        # thread_forum = get_object_or_404(Post, id=self.kwargs['forum'])
         thread_forum = Forum.objects.get(pk=self.kwargs.get('forum', None))
 
         thread_post_user = request.user
@@ -140,12 +129,6 @@ class NewThreadView(CreateView):
         context['thread_form'] = NewThreadForm
         context['post_form'] = NewPostForm
         return context
-
-
-# def MemberlistView(request):
-#   users = User.objects.all()
-
-# return render(request, 'memberlist.html', {'users': users})
 
 
 class MemberlistView(ListView):
