@@ -24,7 +24,7 @@ class HomeView(ListView):
         context['thread_count'] = Thread.objects.all().count()
         context['post_count'] = Post.objects.all().count()
         context['user_count'] = User.objects.all().count()
-        context['newest_user'] = User.objects.order_by('-id')[0]
+        #context['newest_user'] = User.objects.order_by('-id')[0]
         # Side bar statisitcs
 
         return context
