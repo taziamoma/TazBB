@@ -1,1 +1,1 @@
-web: gunicorn TazBB.wsgi
+web: gunicorn TazBB.wsgi --log-file -
