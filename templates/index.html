@@ -45,9 +45,18 @@
                             </div>
                             <div class="container-fluid forum-latest-posts clearfix">
 
-                                <span class="last_thread"><a href="{% url 'viewthread' forum.last_post_thread %}">{{ forum.last_post_thread_name }}</a></span>
-                                <span class='last_post_by'>by <a href="{% url 'member' forum.last_post_thread_author_id %}">{{ forum.last_post_thread_author }}</a></span>
-                                <span class="last_post font-italic">Last Post</span>
+                                <span class="last_thread">
+                                    {% if forum.last_post_thread is not None %}
+                                        <a href="{% url 'viewthread' forum.last_post_thread %}">{{ forum.last_post_thread_name }}</a>
+
+                                        </span>
+                                        <span class='last_post_by'>by <a
+                                                href="{% url 'member' forum.last_post_thread_author_id %}">{{ forum.last_post_thread_author }}</a></span>
+                                        <span class="last_post font-italic">Last Post
+                                    {% else %}
+                                        No posts
+                                    {% endif %}
+                                    </span>
                             </div>
                         </div>
                     </div>
