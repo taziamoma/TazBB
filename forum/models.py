@@ -24,6 +24,7 @@ User.add_to_class('user_thread_count', user_thread_count)
 
 
 class Category(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -31,6 +32,7 @@ class Category(models.Model):
 
 
 class Forum(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='forums')
@@ -72,6 +74,7 @@ class Forum(models.Model):
 
 
 class Thread(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
@@ -102,6 +105,7 @@ class Thread(models.Model):
 
 
 class Post(models.Model):
+    id = models.AutoField(primary_key=True)
     post_body = models.TextField(blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     post_date = models.DateTimeField(auto_now_add=True)
