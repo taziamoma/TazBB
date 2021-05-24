@@ -3,9 +3,9 @@ from .views import *
 
 urlpatterns = [
     path('', HomeView.as_view(), name='index'),
+    path('newthread/<int:forum>', NewThreadView.as_view(), name='newthread'),
     path('threadlist/<int:forum>', ThreadlistView.as_view(), name='threadlist'),
     path('viewthread/<int:thread>', ViewThreadView.as_view(), name='viewthread'),
-    path('newthread/<int:forum>', NewThreadView.as_view(), name='newthread'),
     path('memberlist', MemberlistView.as_view(), name='memberlist'),
     path('member/<int:userid>', UserProfileView, name='member'),
     path('usercp/', UserCPView.as_view(), name='usercp'),

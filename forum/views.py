@@ -124,8 +124,8 @@ class NewThreadView(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(NewThreadView, self).get_context_data(*args, **kwargs)
-        stuff = get_object_or_404(Post, id=self.kwargs['forum'])
-        context['forum'] = stuff.id
+        forum = get_object_or_404(Post, id=self.kwargs['forum'])
+        context['forum'] = forum.id
         context['thread_form'] = NewThreadForm
         context['post_form'] = NewPostForm
         return context
