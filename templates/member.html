@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block title %} {{ user.username }} {% endblock %}
+{% block page_title %} <li class='breadcrumb-item'><a href="">{{ user.username }}</a></li>{% endblock %}
 {% block bodywrap %}
     <div class="container-fluid user-profile-wrap ">
     {% if request.user.is_authenticated %}

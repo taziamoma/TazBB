@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load custom_filters %}
 {% block title %} {{ forum.name }} {% endblock %}
+{% block page_title %} <li class='breadcrumb-item'><a href="">{{ forum.name }}</a></li>{% endblock %}
 {% block bodywrap %}
 
 <!-- THREADLIST -->
