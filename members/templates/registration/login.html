@@ -3,22 +3,31 @@
 {% block bodywrap %}
 
     <div class="container-fluid login-wrapper">
-                <div class="container-fluid login-container">
-                    <div class="container-fluid login-title">
-                        Login:
-                    </div>
-                    <div class="container-fluid login-form-container">
-
-                        <div class="container-fluid login-form">
-                            <form method="post">
-                                {% csrf_token %}
-                                {{ form.as_p }}
-                                <button type="submit" name='Login'>Login</button>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
+        <div class="container-fluid login-container">
+            <div class="container-fluid login-title">
+                Login:
             </div>
+            <div class="container-fluid login-form-container">
+
+                <div class="container-fluid login-form">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username"
+                                   aria-describedby="username" name="username" placeholder="Enter username">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                                   placeholder="Password" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
