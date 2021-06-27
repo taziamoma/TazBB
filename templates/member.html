@@ -1,56 +1,67 @@
 {% extends 'base.html' %}
 {% block title %} {{ user.username }} {% endblock %}
-{% block page_title %} <li class='breadcrumb-item'><a href="">{{ user.username }}</a></li>{% endblock %}
+{% block page_title %}
+    <li class='breadcrumb-item'><a href="">{{ user.username }}</a></li>{% endblock %}
 {% block bodywrap %}
-    <div class="container-fluid user-profile-wrap ">
-    {% if request.user.is_authenticated %}
-        <div class="container-fluid user-basic .clearfix">
-            <div class="container-fluid username_container .clearfix">
-                <div class="container-fluid user_basic_username">
-                    <span>{{ user.username }}</span>
-                </div>
-                <div class="users_edituser">
+    <div class="container-fluid user-profile-wrap">
+        {% if request.user.is_authenticated %}
+            <div class="container-fluid user-basic .clearfix">
+                <div class="container-fluid username_container .clearfix">
+                    <div class="container-fluid user_basic_username">
+                        <span>{{ user.username }}</span>
+                    </div>
+                    <div class="users_edituser">
 
                         {% if request.user.is_staff %}
-                   <a href="" class="btn btn-primary btn-lg active" role="button">Edit User</a>
-                    {% endif %}
+                            <a href="" class="btn btn-primary btn-lg active" role="button">Edit User</a>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+
+                <div class="container-fluid user_basic_userlevel">
+                    <div class="container-fluid is_staff">{% if user.is_staff %}Staff {% else %} Member {% endif %}</div>
+                </div>
+                <div class="container-fluid user_basic_info_wrap .clearfix">
+                    <div class="container-fluid user_basic_list .clearfix">
+                        <ul class="user_basic_info_list">
+                            <li>Registration Date: {{ user.date_joined }}</li>
+                            <li>Date Of Birth:</li>
+                            <li>Local Time:</li>
+                            <li>Status:
+                                {% if user.is_authenticated %}
+                                    <span class='online_status'>Online</span></li>
+                                {% else %}
+                                    <span class='offline_status'>Offline</span></li>
+                                {% endif %}
+                        </ul>
+                    </div>
+
+                    <div class="container-fluid member_avatar_wrap .clearfix">
+                        <div class="avatar">
+                            <img class="avatar-img" src="{{ user.profile.image.url }}">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container-fluid forum_info">
+                <div class="container-fluid user_basic_content_left">
 
                 </div>
             </div>
 
+            <div class="container-fluid forum_info">
+                <div class="container-fluid user_basic_content_right">
 
-            <div class="container-fluid user_basic_userlevel">
-                <div class="container-fluid">{% if user.is_staff %}Staff {% else %} Member {% endif %}</div>
+                </div>
             </div>
-            <div class="container-fluid user_basic_info_wrap">
-                <ul class="user_basic_info">
-                    <li>Registration Date: {{ user.date_joined }}</li>
-                    <li>Date Of Birth:</li>
-                    <li>Local Time:</li>
-                    <li>Status:
-                        {% if user.is_authenticated %}
-                            <span class='online_status'>Online</span></li>
-                        {% else %}
-                            <span class='offline_status'>Offline</span></li>
-                        {% endif %}
-                </ul>
-            </div>
-        </div>
-
-        <div class="container-fluid forum_info">
-            <div class="container-fluid user_basic_content_left">
-
-            </div>
-        </div>
-
-        <div class="container-fluid forum_info">
-            <div class="container-fluid user_basic_content_right">
-
-            </div>
-        </div>
-    {% else %}
-    <h3>You must be logged in to view user profiles</h3>
-    {% endif %}
+        {% else %}
+            <h3>You must be logged in to view user profiles</h3>
+        {% endif %}
 
     </div>
 

@@ -14,7 +14,9 @@
             {% if request.user.is_authenticated %}
                 <div class="usercp_user_details">
                     <div class="usercp_avatar_container">
-                        <div class="avatar"></div>
+                        <div class="avatar">
+                            <img class="avatar-img" src="{{ user.profile.image.url }}">
+                        </div>
                     </div>
                     <div class="usercp_details_content">
                         <h3><a href="{% url 'member' user.id %}">{{ user }}</a></h3>

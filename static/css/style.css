@@ -313,7 +313,7 @@ body a:not(.new-thread):not(.navbar):not(.nav-bar):not(.nav-wrapper) {
 	width: 1500px;
 	padding: 0;
 	background-color: white;
-	min-height: 65px;
+	min-height: 100px;
 	overflow: hidden;
 	border-bottom-left-radius: var(--border-bottom-left-radius);
 	border-bottom-right-radius: var(--border-bottom-right-radius);
@@ -515,9 +515,12 @@ body a:not(.new-thread):not(.navbar):not(.nav-bar):not(.nav-wrapper) {
 	height: 100px;
 	margin: 0 auto;
 	padding: 0;
-	background-image: url('../taz-avatar.jpg');
 	background-size: contain;
 	background-repeat: no-repeat;
+}
+.avatar img {
+	width: 100%;
+	height: 100%;
 }
 /*VIEW THREAD */
 
@@ -706,7 +709,7 @@ body a:not(.new-thread):not(.navbar):not(.nav-bar):not(.nav-wrapper) {
 }
 .user-basic {
 	width: 100%;
-	height: 100%;
+	min-height: 300px;
 	background-color: white;
 	margin: 0;
 	border-radius: var(--border-radius);
@@ -714,6 +717,7 @@ body a:not(.new-thread):not(.navbar):not(.nav-bar):not(.nav-wrapper) {
 	-moz-box-shadow: var(--box-shadow);
 	box-shadow: var(--box-shadow);
 	padding: 10px;
+	border: 1px solid blue;
 }
 .username_container {
 	height: 30%;
@@ -740,28 +744,42 @@ body a:not(.new-thread):not(.navbar):not(.nav-bar):not(.nav-wrapper) {
 	float: left;
 }
 .user_basic_userlevel {
-	height: 20%;
+	height: 50px;
 	width: 100%;
 	margin: 0;
-	padding: 10px;
+	padding: 0;
 	float: left;
 }
-.user_basic_userlevel span {
-	font-size: 15px;
-	font-weight: bold;
+.is_staff {
+	width: 100%;
+	height: 100%;
 }
 .user_basic_info_wrap {
 	width: 100%;
-	height: 40%;
+	height: 100px;
+	float: left;
+	padding: 0;
 }
-ul.user_basic_info {
+.user_basic_list {
+	width: 70%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+.member_avatar_wrap {
+	width: 30%;
+	height: 100%;
+	float: left;
+}
+ul.user_basic_info_list {
 	width: 100%;
 	height: 100%;
 	list-style-type: none;
 	padding: 10px;
 	margin:0;
 }
-ul.user_basic_info li {
+ul.user_basic_info_list li {
 }
 .forum_info {
 	width: 50%;
