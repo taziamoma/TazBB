@@ -8,9 +8,7 @@ django-ckeditor==6.0.0
 django-crispy-forms==1.11.2
 django-heroku==0.3.1
 django-js-asset==1.2.2
-filelock==3.0.12
 gunicorn==20.1.0
-mpmath==1.2.1
 Pillow==8.2.0
 pipenv==2020.11.15
 psycopg2==2.8.6
@@ -19,11 +17,6 @@ python-decouple==3.4
 pytz==2021.1
 six==1.15.0
 sqlparse==0.4.1
-sympy==1.7.1
 virtualenv==20.4.3
 virtualenv-clone==0.5.4
 whitenoise==5.2.0
-windows-tools.product-key==0.3.1
-windows-tools.registry==0.5.1
-windows-tools.wmi-queries==0.9.5
-WMI==1.5.1
