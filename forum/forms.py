@@ -8,7 +8,7 @@ class NewThreadForm(forms.ModelForm):
         fields = ('name',)
 
         widgets = {
-            'name': forms.TextInput(),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'verbose_name': ''}),
         }
 
 
