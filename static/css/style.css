@@ -717,7 +717,6 @@ body a:not(.new-thread):not(.navbar):not(.nav-bar):not(.nav-wrapper) {
 	-moz-box-shadow: var(--box-shadow);
 	box-shadow: var(--box-shadow);
 	padding: 10px;
-	border: 1px solid blue;
 }
 .username_container {
 	height: 30%;
